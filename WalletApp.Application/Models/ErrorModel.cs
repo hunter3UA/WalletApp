@@ -1,7 +1,6 @@
-﻿namespace WalletApp.Application.Models
+﻿namespace WalletApp.Application.Models;
+
+public sealed class ErrorModel
 {
-    public class ErrorModel
-    {
-        public required string Message { get; set; }
-    }
+    public required string Message { get; set; }
 }

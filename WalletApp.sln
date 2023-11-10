@@ -5,13 +5,13 @@ VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C5BCF23E-09BB-4602-A318-488E94E65FBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WalletApp.API", "WalletApp.API\WalletApp.API.csproj", "{9D69D9CF-70D7-456D-B581-1607C37E13C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WalletApp.API", "WalletApp.API\WalletApp.API.csproj", "{9D69D9CF-70D7-456D-B581-1607C37E13C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WalletApp.Application", "WalletApp.Application\WalletApp.Application.csproj", "{92CF8255-42D7-4AE1-87B4-6F4F78CAB908}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WalletApp.Application", "WalletApp.Application\WalletApp.Application.csproj", "{92CF8255-42D7-4AE1-87B4-6F4F78CAB908}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WalletApp.Domain", "WalletApp.Domain\WalletApp.Domain.csproj", "{A8C4AF67-A5CF-48FE-A106-FBA97F3D8515}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WalletApp.Domain", "WalletApp.Domain\WalletApp.Domain.csproj", "{A8C4AF67-A5CF-48FE-A106-FBA97F3D8515}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WalletApp.Infrastructure", "WalletApp.Infrastructure\WalletApp.Infrastructure.csproj", "{D70444AD-23AF-415C-9E9F-D2D45CA08192}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WalletApp.Infrastructure", "WalletApp.Infrastructure\WalletApp.Infrastructure.csproj", "{D70444AD-23AF-415C-9E9F-D2D45CA08192}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

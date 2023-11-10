@@ -1,17 +1,19 @@
-﻿namespace WalletApp.Domain.Constants
+﻿
+namespace WalletApp.Domain.Constants;
+
+public class GlobalConstants
 {
-    public class GlobalConstants
+    public const decimal CardLimit = 1500;
+
+    public class Transaction
     {
-        public const decimal MaxCardBalance = 1500;
+        public const int TransactionNameMaxLength = 100;
 
-        public class Transaction
-        {
-            public const int TransactionNameMaxLength = 100;
+        public const int AuthorizedUserNameMaxLength = 200;
 
-            public const int AuthorizedUserNameMaxLength = 200;
+        public const int TransactionDescriptionMaxLength = 150;
 
-            public const int TransactionDescriptionMaxLength = 150;
-        }
+        public const int IconUrlMaxLength = 10000;
 
     }
 }

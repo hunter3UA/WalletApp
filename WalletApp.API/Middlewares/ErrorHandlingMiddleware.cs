@@ -2,63 +2,64 @@
 using System.Text.Json;
 using WalletApp.Application.Models;
 
-namespace WalletApp.API.Middlewares
+namespace WalletApp.API.Middlewares;
+
+public class ErrorHandlingMiddleware
 {
-    public class ErrorHandlingMiddleware
+    private readonly RequestDelegate _next;
+
+    public ErrorHandlingMiddleware(RequestDelegate next)
     {
-        private readonly RequestDelegate _next;
+        _next = next;
+    }
 
-        public ErrorHandlingMiddleware(RequestDelegate next)
+    public async Task InvokeAsync(HttpContext context, IWebHostEnvironment env)
+    {
+        try
         {
-            _next = next;
+            await _next(context);
         }
-
-        public async Task InvokeAsync(HttpContext context, IWebHostEnvironment env)
+        catch (Exception error)
         {
-            try
-            {
-                await _next(context);
-            }
-            catch (Exception error)
-            {
-                await HandleException(error, context, env.IsDevelopment());
-            }
+            await HandleException(error, context, env.IsDevelopment());
         }
+    }
 
-        private async Task HandleException(Exception error, HttpContext context, bool isDevelopment)
+    private async Task HandleException(Exception error, HttpContext context, bool isDevelopment)
+    {
+        context.Response.ContentType = "application/json";
+        context.Response.StatusCode = GetCode(error);
+
+        var errorMessage = GetErrorMessage(error, isDevelopment, context.Response.StatusCode);
+        var errorModel = new ErrorModel { Message = errorMessage };
+        var responseModel = new ResponseModel<string>(errorModel);
+        var responseBody = JsonSerializer.Serialize(responseModel);
+   
+
+        await context.Response.WriteAsync(responseBody);
+    }
+
+    private static int GetCode(Exception error)
+    {
+        return error switch
         {
-            context.Response.ContentType = "application/json";
-            context.Response.StatusCode = GetCode(error);
+            KeyNotFoundException => (int)HttpStatusCode.NotFound,
+            InvalidOperationException => (int)HttpStatusCode.BadRequest,
+            _ => (int)HttpStatusCode.InternalServerError
+        };
+    }
 
-            var errorMessage = GetErrorMessage(error, isDevelopment, context.Response.StatusCode);
-            var errorModel = new ErrorModel { Message = errorMessage };
+    private static string GetErrorMessage(Exception ex, bool isDevelopment, int httpStatusCode)
+    {
+        string errorMessage;
 
-            var responseBody = JsonSerializer.Serialize(new ErrorResponseModel(errorModel));
+        if (isDevelopment)
+            errorMessage = ex.ToString();
+        else if (httpStatusCode >= (int)HttpStatusCode.InternalServerError)
+            errorMessage = "Something wrong Happened";
+        else
+            errorMessage = ex.Message;
 
-            await context.Response.WriteAsync(responseBody);
-        }
-
-        private static int GetCode(Exception error)
-        {
-            return error switch
-            {
-                KeyNotFoundException => (int)HttpStatusCode.NotFound,
-                InvalidOperationException => (int)HttpStatusCode.BadRequest,
-                _ => (int)HttpStatusCode.InternalServerError
-            };
-        }
-
-        private static string GetErrorMessage(Exception ex, bool isDevelopment, int httpStatusCode)
-        {
-            string errorMessage;
-            if (isDevelopment)
-                errorMessage = ex.ToString();
-            else if (httpStatusCode >= (int)HttpStatusCode.InternalServerError)
-                errorMessage = "Something wrong Happened";
-            else
-                errorMessage = ex.Message;
-
-            return errorMessage;
-        }
+        return errorMessage;
     }
 }

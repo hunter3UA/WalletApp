@@ -1,8 +1,8 @@
-﻿namespace WalletApp.Domain.Enums
+﻿
+namespace WalletApp.Domain.Enums;
+
+public enum TransactionType
 {
-    public enum TransactionType
-    {
-        Payment,
-        Credit
-    }
+    Payment,
+    Credit
 }
