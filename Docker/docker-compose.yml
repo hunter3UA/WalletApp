@@ -3,6 +3,7 @@ version: '1.0'
 services:
   walletapp.api:
     image: hunter3/wallet-api
+
     ports:
       - "80"
     environment:
