@@ -1,9 +1,8 @@
-﻿
-namespace WalletApp.Application.DTO.Transactions;
+﻿namespace WalletApp.Application.DTO;
 
 public sealed record TransactionDTO(
-    string Name, 
-    decimal Sum, 
+    string Name,
+    decimal Sum,
     string Type,
     bool Pending,
     string ExecutedDay,
