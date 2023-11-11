@@ -15,9 +15,6 @@ public static class IQueryableExtensions
         int take)
         where TEntity : BaseEntityDb
     {
-
-        ArgumentNullException.ThrowIfNull(query,$" {nameof(query)} can't be null");
-
         query = query.ApplySorting(sortingExpression, sortingOrder);
 
         if (skip != default)
