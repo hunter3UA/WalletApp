@@ -10,7 +10,7 @@ using WalletApp.Domain.Enums;
 
 namespace WalletApp.Application.Handlers;
 
-public class GetFilteredAndSortedAccountDataHandler : IRequestHandler<GetPagedAndSortedTransactionsRequest, AccountDataDTO>
+public class GetFilteredAndSortedAccountDataHandler : IRequestHandler<GetFilteredAndSortedAccountDataRequest, AccountDataDTO>
 {
     private readonly ITransactionRepository _transactionRepository;
     private readonly IPointsService _pointsService;
@@ -21,7 +21,7 @@ public class GetFilteredAndSortedAccountDataHandler : IRequestHandler<GetPagedAn
         _pointsService = pointsService;
     }
 
-    public async Task<AccountDataDTO> Handle(GetPagedAndSortedTransactionsRequest request, CancellationToken cancellationToken)
+    public async Task<AccountDataDTO> Handle(GetFilteredAndSortedAccountDataRequest request, CancellationToken cancellationToken)
     {
         var transactions = await _transactionRepository
             .GetRangeAsync(trn => trn.UserId == request.UserId, trn => trn.ExecutedDay, SortingOrder.Desc, cancellationToken, default, 10);

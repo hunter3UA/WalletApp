@@ -20,7 +20,7 @@ public class AccountsInfoController : ControllerBase
     [HttpGet("{userId}")]
     public async Task<ActionResult> GetAccountData([FromRoute] int userId, CancellationToken cancellationToken)
     {
-        var pagedTransactionRequest = new GetPagedAndSortedTransactionsRequest(userId);
+        var pagedTransactionRequest = new GetFilteredAndSortedAccountDataRequest(userId);
         var accountData = await _mediator.Send(pagedTransactionRequest, cancellationToken);
         var response = new ResponseModel<AccountDataDTO>(accountData);
 
