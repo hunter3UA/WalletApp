@@ -2,7 +2,7 @@
 
 namespace WalletApp.Application.Helpers;
 
-public static class DateFormatterHelper
+public static class DateFormatter
 {
     public static string FormatDate(DateTimeOffset date, DateTimeOffset now)
     {

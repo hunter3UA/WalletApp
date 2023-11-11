@@ -31,11 +31,9 @@ public class ErrorHandlingMiddleware
         context.Response.StatusCode = GetCode(error);
 
         var errorMessage = GetErrorMessage(error, isDevelopment, context.Response.StatusCode);
-        var errorModel = new ErrorModel { Message = errorMessage };
-        var responseModel = new ResponseModel<string>(errorModel);
+        var responseModel = new ResponseModel<string>(errorMessage);
         var responseBody = JsonSerializer.Serialize(responseModel);
    
-
         await context.Response.WriteAsync(responseBody);
     }
 

@@ -3,21 +3,22 @@ namespace WalletApp.Application.Models;
 
 public sealed class ResponseModel<T>
 {
-    public T? Data { get; set; }
+    public T? Data { get; }
 
     public bool Success { get; }
 
-    public IEnumerable<ErrorModel>? Errors { get; set; }
+    public IEnumerable<string> Errors { get; }
 
     public ResponseModel(T data)
     {
         Data = data;
         Success = true;
+        Errors = Enumerable.Empty<string>();
     }
 
-    public ResponseModel(params ErrorModel[] data)
+    public ResponseModel(params string[] errors)
     {
-        Errors = data;
+        Errors = errors;
         Success = false;
     }
 }
